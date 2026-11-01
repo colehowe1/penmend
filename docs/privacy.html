@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Penmend Privacy Policy</title>
+<meta name="description" content="What the Penmend Chrome extension reads, what stays on your computer, and what goes to Anthropic when you turn on Claude.">
+<style>
+  :root {
+    --bg: #fbfaf7; --fg: #1f2328; --muted: #5d6470; --line: #e3e0d8; --card: #ffffff;
+    --accent: #0f766e; --accent-soft: #e6f3f1;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #15181c; --fg: #e8e6e1; --muted: #a3a9b3; --line: #2c3138; --card: #1c2025; --accent: #4fd1c1; --accent-soft: #17302d; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 16px 72px; }
+  header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+  .mark { width: 44px; height: 44px; border-radius: 11px; background: linear-gradient(#14968b, #0f766e); display: grid; place-items: center; flex: none; }
+  h1 { font-size: 30px; line-height: 1.2; margin: 0; letter-spacing: -0.01em; }
+  .dates { color: var(--muted); font-size: 15px; margin: 4px 0 28px; }
+  h2 { font-size: 20px; margin: 36px 0 8px; }
+  p, li { color: var(--fg); }
+  ul { padding-left: 22px; }
+  li { margin: 6px 0; }
+  .summary { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px; }
+  .summary h2 { margin-top: 0; }
+  .summary li::marker { color: var(--accent); }
+  .note { background: var(--accent-soft); border-radius: 10px; padding: 12px 16px; }
+  a { color: var(--accent); }
+  code { font-size: 15px; background: var(--accent-soft); padding: 1px 5px; border-radius: 5px; }
+  footer { margin-top: 48px; color: var(--muted); font-size: 15px; border-top: 1px solid var(--line); padding-top: 16px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 128 128" width="30" height="30"><path d="M32 62 L54 84 L98 36" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 104 H98" stroke="#fff" stroke-opacity="0.6" stroke-width="8" stroke-linecap="round"/></svg>
+    </div>
+    <h1>Penmend Privacy Policy</h1>
+  </header>
+  <p class="dates">Effective 30 October 2026</p>
+
+  <p>Penmend is a Chrome extension that checks spelling, grammar and punctuation in the text boxes you write in, and can rewrite text for you. This page explains what it reads, what stays on your computer, and what leaves it.</p>
+
+  <section class="summary">
+    <h2>The short version</h2>
+    <ul>
+      <li>Penmend has no server and no accounts. Its developer never receives what you type.</li>
+      <li>The built-in checker runs on your computer. Nothing is sent anywhere for those checks.</li>
+      <li>Only if you add your own Anthropic API key do the paragraphs being checked, and any text you ask it to rewrite, go to Anthropic to be checked by Claude.</li>
+      <li>No analytics, no ads, no tracking, and no selling or sharing of your data.</li>
+    </ul>
+  </section>
+
+  <h2>What Penmend reads</h2>
+  <p>When you click into a text box on a website, Penmend reads the text in that box so it can check it as you type. If you select text and choose <em>Rewrite with Penmend</em> from the right-click menu (or press Alt+Shift+R), it also reads that selection and a little of the text around it. It doesn't read the rest of the page, your browsing history or other tabs.</p>
+  <p>It doesn't check password fields, read-only boxes, code editors, boxes a website marks as off-limits to writing checkers, plain text areas a website marks as not for spellchecking, or replies quoted below an email you're writing. One-line fields are only checked if you turn that on. You can turn Penmend off for any website from its toolbar button.</p>
+
+  <h2>What stays on your computer</h2>
+  <ul>
+    <li><strong>Local checking.</strong> Spelling, grammar and punctuation checks run inside Chrome with Harper, an open-source checker bundled in the extension.</li>
+    <li><strong>Your Anthropic API key</strong>, if you add one. It's kept in Chrome's local extension storage, which websites can't read, and it isn't synced to other computers.</li>
+    <li><strong>A usage meter</strong> counting your Claude requests and their estimated cost, so the daily spending limit can work.</li>
+    <li><strong>Your writing pad draft</strong>, if you use Penmend's writing pad, so it's still there next time. The pad's Clear button deletes it.</li>
+    <li>Results Penmend has worked out for the text on screen. These are kept in memory only while the page is open.</li>
+  </ul>
+
+  <h2>What Chrome syncs</h2>
+  <p>Your Penmend settings (personal dictionary, style notes, the sites you've turned it off on, and the suggestions you've told it to stop making) are saved with Chrome's sync storage. If you've turned on Chrome sync, Google keeps them with your Chrome profile so they follow you to other computers, under <a href="https://policies.google.com/privacy">Google's privacy policy</a>. Penmend's developer can't see them.</p>
+
+  <h2>What goes to Anthropic, and only if you turn on Claude</h2>
+  <p>Claude features are off until you add your own API key from Anthropic and choose a model in Penmend's settings. When you save a key, Penmend sends Anthropic one short test message (not your text) to check that the key works. After that, Penmend sends requests from your browser straight to Anthropic's API (<code>api.anthropic.com</code>), using your key:</p>
+  <ul>
+    <li>paragraphs from the text box you're typing in, so Claude can check them: when you pause typing, closest to your cursor first, including text that was already in that box (or only when you click <em>Check with Claude</em>, if you choose that setting);</li>
+    <li>text you choose to rewrite, with up to a few sentences around it for context;</li>
+    <li>writing samples you paste into <em>Learn my style</em>;</li>
+    <li>your settings that shape the result: your English variant, style notes, dictionary words, phrasings you've told it to keep, the punctuation you don't use, and whether to suggest clearer sentences.</li>
+  </ul>
+  <p>As with any web request, Anthropic also receives your IP address and basic browser details (such as Chrome's version).</p>
+  <p>Automatic checks start only after you've typed in a box yourself, so text a website fills into a box you haven't touched isn't sent unless you click <em>Check with Claude</em>. Checks never include paragraphs that look like they contain a password, API key, access token, PIN or card number; if text you ask it to rewrite looks like that, Penmend asks you first. Claude never checks text boxes whose name or label marks them for passwords, keys or code, or text on the websites of 1Password, Bitwarden, LastPass, Dashlane, Keeper and Proton; if you ask to rewrite text in one of those boxes, Penmend asks you first. The local checker, which never sends anything, still works there.</p>
+  <p class="note">Anthropic handles that text under its own terms and privacy policy (see <a href="https://www.anthropic.com/legal/privacy">anthropic.com/legal/privacy</a>), under the account your API key belongs to. Penmend isn't made by or affiliated with Anthropic, and its developer never receives your text, your key, or Anthropic's responses.</p>
+
+  <h2>What Penmend doesn't do</h2>
+  <ul>
+    <li>It doesn't sell, rent or share your data with anyone.</li>
+    <li>It doesn't use your data for advertising, profiling, creditworthiness or lending, or anything other than checking and rewriting your writing.</li>
+    <li>It doesn't collect analytics, crash reports or browsing history.</li>
+    <li>It doesn't run code downloaded from the internet. Everything it runs ships inside the extension.</li>
+  </ul>
+  <p>Penmend's use of information follows the <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use">Chrome Web Store User Data Policy</a>, including its Limited Use requirements.</p>
+
+  <h2>Your choices</h2>
+  <ul>
+    <li>Use Penmend without Claude: don't add a key, or remove it in Settings. Local checking keeps working.</li>
+    <li>Set Claude to check only when you click, or never (rewrites only).</li>
+    <li>Turn Penmend off for a website, or everywhere, from its toolbar button.</li>
+    <li>Uninstalling Penmend removes the data it keeps on your computer, including your API key. Settings kept in Chrome sync are managed by Chrome; resetting sync in Chrome's settings erases them.</li>
+  </ul>
+
+  <h2>Children</h2>
+  <p>Penmend isn't directed at children under 13 and doesn't knowingly collect their information.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy changes, the new version will be posted here with a new effective date.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about privacy: <a href="mailto:chowenutechnational@gmail.com">chowenutechnational@gmail.com</a>.</p>
+
+  <footer>Penmend is an independent extension. Claude and Anthropic are trademarks of Anthropic, PBC. Chrome is a trademark of Google LLC.</footer>
+</main>
+</body>
+</html>

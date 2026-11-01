@@ -1,0 +1,24 @@
+/* Penmend underlines (CSS Custom Highlight API). Nothing here matches unless Penmend has
+   registered highlights named pm-*; pages never see a style change otherwise. */
+::highlight(pm-red) {
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-color: #e5484d;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-skip-ink: none;
+}
+::highlight(pm-blue) {
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-color: #3e7bfa;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-skip-ink: none;
+}
+::highlight(pm-active) {
+  background-color: rgba(229, 72, 77, 0.18);
+}
+::highlight(pm-active-blue) {
+  background-color: rgba(62, 123, 250, 0.16);
+}

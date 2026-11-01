@@ -1,0 +1,10 @@
+node_modules/
+dist/
+dist-test/
+*.zip
+.DS_Store
+dist-store/
+store/paste-sheet.html
+
+# Your own starting dictionary/style (see src/shared/seed.js)
+src/shared/seed.local.js

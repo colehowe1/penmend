@@ -1,0 +1,30 @@
+{
+  "name": "penmend",
+  "version": "1.1.1",
+  "private": true,
+  "description": "Penmend: spelling, grammar and rewrites in any Chrome text box. Harper checks locally for free; Claude adds deeper checks and rewrites with your own API key.",
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/colehowe1/penmend"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "zip": "node build.mjs --zip",
+    "icons": "node tools/make-icons.mjs",
+    "test": "node --test \"test/unit/*.test.mjs\"",
+    "e2e": "node build.mjs --test && node test/e2e/run.mjs",
+    "editors": "node build.mjs --test && node test/e2e/editors.mjs",
+    "store-images": "node build.mjs --test && node tools/store-images.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "1.3.0",
+    "harper.js": "3.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "puppeteer-core": "25.16.0"
+  }
+}

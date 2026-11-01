@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Penmend test page</title>
+  <link rel="icon" href="data:,">
+  <style>
+    body { font: 16px/1.5 Georgia, serif; margin: 32px; }
+    textarea, .ce, input { display: block; width: 620px; margin: 0 0 18px; font: 16px/1.5 Georgia, serif; padding: 10px; border: 1px solid #bbb; border-radius: 6px; }
+    textarea { height: 130px; }
+    .ce { min-height: 90px; }
+    iframe { width: 640px; height: 110px; border: 1px solid #bbb; }
+  </style>
+</head>
+<body>
+  <h1>Penmend test page</h1>
+  <textarea id="ta" aria-label="plain textarea"></textarea>
+  <textarea id="ta2" aria-label="filled by the page" style="height: 60px"></textarea>
+  <div id="ce" class="ce" contenteditable="true" aria-label="rich editor"></div>
+  <input id="subject" type="text" aria-label="subject">
+  <textarea id="code" spellcheck="false" aria-label="code box"></textarea>
+  <div id="gramm" class="ce" contenteditable="true" data-gramm="false" aria-label="opted out"></div>
+  <div id="reply" class="ce" contenteditable="true"><div>New text here</div><div class="gmail_quote"><blockquote>Quoted teh text that is not mine</blockquote></div></div>
+  <div id="outlook" class="ce" contenteditable="true"><div>Thanks, that works.</div><div id="Signature"><div>Pat Leee | Acmme Corp</div></div><div id="appendonsend"></div><hr><div id="divRplyFwdMsg"><b>From:</b> Someone<br><b>Sent:</b> Monday</div><div>Their was a problm with teh camera.</div></div>
+  <x-box id="xbox"></x-box>
+  <div id="ck" class="ce" contenteditable="true" aria-label="editor that types for itself"></div>
+  <iframe id="frame" title="frame editor" srcdoc="<body contenteditable='true' style='font:16px sans-serif;margin:8px;min-height:80px'></body>"></iframe>
+  <dialog id="dlg" style="position: fixed; inset: auto; top: 50%; left: 50%; margin: 0; transform: translate(-50%, -50%); padding: 20px; border-radius: 12px;">
+    <textarea id="dta" aria-label="dialog textarea" style="width: 420px; height: 100px;"></textarea>
+  </dialog>
+  <div style="height: 1400px"></div>
+  <script>
+    // A web component with its own textarea (Shoelace, Material Web, Salesforce work like this).
+    customElements.define('x-box', class extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: 'open' }).innerHTML =
+          '<textarea id="inner" aria-label="textarea in a web component" style="display:block;width:620px;height:80px;font:16px/1.5 Georgia,serif;padding:10px;border:1px solid #bbb;border-radius:6px;margin:0 0 18px"></textarea>';
+      }
+    });
+    // Like CKEditor 5: cancel the browser's own typing and change the text itself, so no 'input'
+    // event ever fires.
+    document.getElementById('ck').addEventListener('beforeinput', (e) => {
+      if (e.inputType !== 'insertText' || !e.data) return;
+      e.preventDefault();
+      const sel = getSelection();
+      const r = sel.getRangeAt(0);
+      r.deleteContents();
+      const t = document.createTextNode(e.data);
+      r.insertNode(t);
+      r.setStartAfter(t);
+      r.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(r);
+    });
+  </script>
+</body>
+</html>

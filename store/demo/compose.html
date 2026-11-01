@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>New message</title>
+  <link rel="icon" href="data:,">
+  <!-- A plain, made-up mail app for the store screenshots (tools/store-images.mjs). -->
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; height: 100vh; background: #eef1f4; font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1f2328; display: flex; flex-direction: column; }
+    .bar { height: 52px; flex: none; display: flex; align-items: center; gap: 12px; padding: 0 22px; background: #fff; border-bottom: 1px solid #dde2e8; }
+    .logo { width: 26px; height: 26px; border-radius: 7px; background: #5b6b7f; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 14px; }
+    .bar b { font-size: 16px; }
+    .search { margin-left: 28px; flex: 0 1 420px; height: 34px; border-radius: 17px; background: #f1f3f6; color: #8a93a0; display: flex; align-items: center; padding: 0 16px; font-size: 14px; }
+    .wrap { flex: 1; display: flex; min-height: 0; }
+    .side { width: 190px; flex: none; padding: 18px 14px; color: #4a5361; }
+    .side div { padding: 7px 12px; border-radius: 8px; margin-bottom: 2px; }
+    .side .on { background: #dfe6ee; color: #1f2328; font-weight: 600; }
+    .compose { flex: 1; margin: 18px 24px 22px 0; background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(20, 30, 45, 0.12); display: flex; flex-direction: column; min-width: 0; }
+    .head { padding: 12px 20px; font-weight: 600; border-bottom: 1px solid #eceff3; display: flex; justify-content: space-between; }
+    .head span { color: #8a93a0; font-weight: 400; letter-spacing: 3px; }
+    .field { display: flex; gap: 10px; padding: 9px 20px; border-bottom: 1px solid #eceff3; color: #6b7480; }
+    .field b { color: #1f2328; font-weight: 500; }
+    #body { flex: 1; padding: 16px 20px; outline: none; font-size: 16px; line-height: 1.65; overflow: auto; }
+    #body div { min-height: 1.65em; }
+    .foot { padding: 12px 20px; border-top: 1px solid #eceff3; display: flex; gap: 12px; align-items: center; }
+    .send { background: #2f6fd6; color: #fff; border-radius: 18px; padding: 7px 22px; font-weight: 600; }
+    .foot span { color: #8a93a0; }
+  </style>
+</head>
+<body>
+  <div class="bar"><div class="logo">M</div><b>Mail</b><div class="search">Search mail</div></div>
+  <div class="wrap">
+    <div class="side"><div class="on">Drafts</div><div>Inbox</div><div>Sent</div><div>Archive</div></div>
+    <div class="compose">
+      <div class="head">New message <span>– □ ×</span></div>
+      <div class="field">To <b>Dana Brooks</b></div>
+      <div class="field">Subject <b>Thursday install</b></div>
+      <div id="body" contenteditable="true" aria-label="Message body"></div>
+      <div class="foot"><div class="send">Send</div><span>Draft saved</span></div>
+    </div>
+  </div>
+</body>
+</html>

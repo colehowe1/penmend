@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Writing pad · Penmend</title>
+  <link rel="icon" href="../icons/32.png">
+  <link rel="stylesheet" href="../highlights.css">
+  <link rel="stylesheet" href="pad.css">
+</head>
+<body>
+  <header class="bar">
+    <div class="brand"><span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 11.5l4 4 9-9.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 19.5h13" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/></svg></span> Writing pad</div>
+    <div class="meta" id="meta">0 words</div>
+    <div class="actions">
+      <button id="copy" class="btn primary" type="button">Copy all</button>
+      <button id="clear" class="btn" type="button">Clear</button>
+      <button id="settings" class="btn" type="button">Settings</button>
+    </div>
+  </header>
+  <main>
+    <p class="hint">Write or paste here, then copy it into anything (Outlook, a ticket, a text). Penmend checks it as you type; click the badge in the corner to fix everything or rewrite it. Your draft stays on this computer.</p>
+    <div id="editor" class="editor" contenteditable="true" spellcheck="true" role="textbox" aria-multiline="true" aria-label="Writing pad" data-placeholder="Start writing…"></div>
+    <p class="status" id="status" aria-live="polite"></p>
+  </main>
+  <script type="module" src="pad.js"></script>
+</body>
+</html>

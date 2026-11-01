@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Penmend settings</title>
+  <link rel="icon" href="../icons/32.png">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 11.5l4 4 9-9.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 19.5h13" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/></svg></span><div><div class="name">Penmend</div><div class="tag">Spelling, grammar and rewrites in any text box</div></div></div>
+    <nav aria-label="Sections">
+      <a href="#claude">Claude</a><a href="#style">My style</a><a href="#checking">Checking</a><a href="#dictionary">Dictionary</a><a href="#sites">Sites &amp; keys</a><a href="#usage">Usage</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card welcome" id="welcome" hidden>
+      <h2>Penmend is on</h2>
+      <p>It already checks spelling and grammar in every text box as you type, free and on this computer. Click an underline to fix it, or the round badge in the corner of a text box to see everything.</p>
+      <p>For smarter checks and one-click rewrites, connect Claude below (optional, a few cents to a few dollars a month).</p>
+    </section>
+
+    <section class="card" id="claude">
+      <h2>Claude <span class="pill" id="claude-pill">Off</span></h2>
+      <p class="lead">Claude catches what the local checker misses (wrong words, awkward or unclear sentences) and rewrites text when you ask. It runs on your own Anthropic API key, billed by Anthropic for what you use.</p>
+
+      <div class="field">
+        <label for="key">API key</label>
+        <div class="inline">
+          <input id="key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-…">
+          <button class="btn" id="key-show" type="button">Show</button>
+          <button class="btn primary" id="key-save" type="button">Save key</button>
+          <button class="btn danger" id="key-remove" type="button" hidden>Remove</button>
+        </div>
+        <p class="help">Create one at <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com → API keys</a>. It's stored only in this Chrome profile (never synced) and web pages can't read it.</p>
+        <p class="status" id="key-status" aria-live="polite"></p>
+      </div>
+
+      <div class="field">
+        <div class="label">Model for checks <span class="muted">(runs often: cheap and quick matters)</span></div>
+        <div class="models" id="check-models" role="radiogroup" aria-label="Model for checks"></div>
+      </div>
+      <div class="field">
+        <div class="label">Model for rewrites <span class="muted">(runs when you ask)</span></div>
+        <div class="models" id="rewrite-models" role="radiogroup" aria-label="Model for rewrites"></div>
+      </div>
+      <p class="estimate" id="estimate"></p>
+      <div class="field">
+        <label for="daily">Daily limit</label>
+        <div class="inline">
+          <span class="money">$</span><input id="daily" type="number" min="0.10" step="0.50" inputmode="decimal" class="short">
+          <span class="help" id="today"></span>
+        </div>
+        <p class="help">Claude stops for the day when this much has been spent; nothing a web page does can get past it.</p>
+      </div>
+
+      <div class="field">
+        <div class="label">When Claude checks</div>
+        <div class="segmented" role="radiogroup" aria-label="When Claude checks">
+          <label><input type="radio" name="aiMode" value="auto"> When I pause typing</label>
+          <label><input type="radio" name="aiMode" value="manual"> Only when I click "Check with Claude"</label>
+          <label><input type="radio" name="aiMode" value="off"> Never (rewrites only)</label>
+        </div>
+      </div>
+      <label class="switch-row"><input type="checkbox" id="rewriteSuggestions"> <span>Offer a clearer version of long or hard-to-read sentences when Claude checks</span></label>
+      <div class="inline">
+        <button class="btn" id="test" type="button">Test connection</button>
+        <span class="status" id="test-status" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <section class="card" id="style">
+      <h2>My writing style</h2>
+      <p class="lead">Describe how you write. Claude leaves these habits alone when it checks, and follows them when it rewrites (and for "Sound like me").</p>
+      <label class="switch-row"><input type="checkbox" id="useStyle"> <span>Use my style in Claude's checks and rewrites</span></label>
+      <div class="field">
+        <label for="styleNotes">Style notes</label>
+        <textarea id="styleNotes" rows="6" maxlength="2000" placeholder="- Emails start with &quot;Hello,&quot;&#10;- No sign-off&#10;- Short and direct"></textarea>
+        <p class="help"><span id="style-count">0</span>/2000 · saved automatically</p>
+      </div>
+      <div class="field">
+        <div class="label">Punctuation I don't use</div>
+        <label class="switch-row"><input type="checkbox" id="noSemicolons"> <span>Semicolons ( ; )</span></label>
+        <label class="switch-row"><input type="checkbox" id="noDashes"> <span>Dashes ( — – -- )</span></label>
+        <p class="help">Never suggested, by either checker, and kept out of Claude's rewrites. Hyphens inside words (back-room) are fine.</p>
+      </div>
+      <details class="learn">
+        <summary>Learn my style from my writing</summary>
+        <p class="help">Paste 2 to 5 things you've written (emails, messages). Claude describes your habits; you choose what to keep. Uses your rewrite model.</p>
+        <textarea id="samples" rows="8" placeholder="Paste a few of your emails here…"></textarea>
+        <div class="inline">
+          <button class="btn primary" id="learn" type="button">Describe my style</button>
+          <span class="status" id="learn-status" aria-live="polite"></span>
+        </div>
+        <div id="learned" hidden>
+          <div class="label">Claude's description</div>
+          <pre class="proposal" id="proposal"></pre>
+          <div class="inline">
+            <button class="btn primary" id="learn-replace" type="button">Use this</button>
+            <button class="btn" id="learn-add" type="button">Add to my notes</button>
+            <button class="btn" id="learn-discard" type="button">Discard</button>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section class="card" id="checking">
+      <h2>Checking</h2>
+      <div class="grid2">
+        <div class="field">
+          <label for="dialect">English</label>
+          <select id="dialect"></select>
+        </div>
+        <div class="field">
+          <div class="label">Check for</div>
+          <div class="checks" id="categories"></div>
+        </div>
+      </div>
+      <label class="switch-row"><input type="checkbox" id="hoverCards"> <span>Show the suggestion when I rest the mouse on an underline (otherwise click it)</span></label>
+      <label class="switch-row"><input type="checkbox" id="ignoreAllCaps"> <span>Don't flag words in ALL CAPS (acronyms like NASA, FAQ)</span></label>
+      <label class="switch-row"><input type="checkbox" id="nativeSpellcheckOff"> <span>Hide Chrome's own red squiggles in text boxes Penmend checks</span></label>
+      <label class="switch-row"><input type="checkbox" id="checkInputs"> <span>Also check one-line boxes (subject lines and the like; skips names, emails and search boxes)</span></label>
+      <label class="switch-row"><input type="checkbox" id="selectionButton"> <span>Show a "Rewrite" button when I select text in a text box (needs Claude)</span></label>
+    </section>
+
+    <section class="card" id="dictionary">
+      <h2>Dictionary <span class="pill" id="dict-count">0</span></h2>
+      <p class="lead">Words never flagged as misspelled. "Add to dictionary" on a suggestion adds here too.</p>
+      <div class="inline">
+        <input id="word" type="text" placeholder="Add a word" spellcheck="false">
+        <button class="btn primary" id="word-add" type="button">Add</button>
+      </div>
+      <div class="chips" id="words"></div>
+
+      <h3>Turned-off checks</h3>
+      <p class="help">Checks you switched off with "Turn off this check".</p>
+      <div class="list" id="rules"></div>
+      <h3>Kept on purpose</h3>
+      <p class="help">Changes Claude won't suggest again ("Never flag this").</p>
+      <div class="list" id="never"></div>
+    </section>
+
+    <section class="card" id="sites">
+      <h2>Sites &amp; shortcuts</h2>
+      <div class="label">Turned off on</div>
+      <div class="list" id="site-list"></div>
+      <div class="field">
+        <div class="label">Keyboard shortcuts</div>
+        <div class="list" id="shortcuts"></div>
+        <button class="btn" id="shortcuts-edit" type="button">Change shortcuts</button>
+      </div>
+    </section>
+
+    <section class="card" id="usage">
+      <h2>Claude usage this month</h2>
+      <p class="help">Estimated from list prices; your Anthropic console has the exact bill.</p>
+      <div id="usage-table"></div>
+      <button class="btn" id="usage-reset" type="button">Reset the counter</button>
+    </section>
+
+    <section class="card quiet" id="privacy">
+      <h2>Privacy</h2>
+      <p>The local checker (Harper, open source) runs entirely in Chrome on this computer. Nothing you type leaves your computer unless Claude is set up; then only the paragraphs being checked, and text you ask to rewrite, go to Anthropic's API under your key. Penmend has no server of its own and collects nothing.</p>
+      <p class="help">Built with Harper (Apache-2.0, by Automattic) and the Anthropic SDK. Their licenses are in the extension's <code>licenses</code> folder.</p>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Penmend</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 11.5l4 4 9-9.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 19.5h13" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/></svg></span>
+    <div class="titles">
+      <div class="title">Penmend</div>
+      <div class="sub" id="engine">Checking with Harper (on this computer)</div>
+    </div>
+    <label class="switch" title="Turn Penmend on or off everywhere">
+      <input type="checkbox" id="enabled" aria-label="Penmend on">
+      <span></span>
+    </label>
+  </header>
+
+  <section class="rows">
+    <div class="row" id="site-row">
+      <div>
+        <div class="label">On this site</div>
+        <div class="hint" id="site-name">—</div>
+      </div>
+      <label class="switch small"><input type="checkbox" id="site" aria-label="Check text on this site"><span></span></label>
+    </div>
+    <div class="row">
+      <div>
+        <div class="label">Claude</div>
+        <div class="hint" id="claude-status">Not set up</div>
+      </div>
+      <button class="btn small" id="claude-setup" type="button">Set up</button>
+    </div>
+    <div class="row" id="usage-row" hidden>
+      <div>
+        <div class="label">This month</div>
+        <div class="hint" id="usage">—</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <button class="btn primary" id="pad" type="button">Open writing pad</button>
+    <button class="btn" id="settings" type="button">Settings</button>
+  </footer>
+  <div class="keys" id="keys"></div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
