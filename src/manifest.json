@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Penmend",
   "short_name": "Penmend",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Spelling, grammar and clearer sentences in any text box. Free, private local checks, plus optional AI checks with your own key.",
   "minimum_chrome_version": "120",
   "icons": {

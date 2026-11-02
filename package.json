@@ -1,6 +1,6 @@
 {
   "name": "penmend",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": true,
   "description": "Penmend: spelling, grammar and rewrites in any Chrome text box. Harper checks locally for free; Claude adds deeper checks and rewrites with your own API key.",
   "license": "GPL-3.0-or-later",

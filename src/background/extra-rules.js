@@ -59,12 +59,27 @@ function youreWelcome(text) {
 // Harper lints whose advice on the same words is worse than ours ("Its the" -> "The").
 const OUTRANKED = new Set(['TheMy', 'MultipleSequentialPronouns']);
 
+// Harper splits these closed compounds with a space ("doublecheck" -> "double check"); the
+// dictionaries hyphenate them.
+const HYPHENATED = new Map([['double check', 'double-check'], ['double click', 'double-click'],
+  ['cross check', 'cross-check']]);
+
+function hyphenateSplits(l) {
+  if (l.rule !== 'SplitWords') return l;
+  const suggestions = l.suggestions.map((s) => {
+    const fixed = HYPHENATED.get(s.text.toLowerCase());
+    if (!fixed) return s;
+    return { ...s, text: s.text[0] === s.text[0].toUpperCase() ? fixed[0].toUpperCase() + fixed.slice(1) : fixed };
+  });
+  return { ...l, message: l.message.replace(/`([^`]+)`(?=\.?$)/, (m, w) => (HYPHENATED.has(w.toLowerCase()) ? `\`${suggestions[0].text}\`` : m)), suggestions };
+}
+
 /**
  * Harper's lints plus ours, sorted. Ours never pile onto a span Harper already flagged, except where
  * Harper's advice there is one of the poor ones above, which ours replaces.
  */
 export function withExtraLints(lints, text) {
-  const out = [...lints];
+  const out = lints.map(hyphenateSplits);
   for (const x of [...doubleCommas(text), ...itsContractions(text), ...youreWelcome(text)]) {
     const clashing = out.filter((l) => l.start < x.end && x.start < l.end);
     if (clashing.some((l) => !OUTRANKED.has(l.rule))) continue;

@@ -144,6 +144,18 @@ test('extra checks don\'t pile onto Harper\'s, but replace its poor "Its the" ad
   assert.deepEqual(withExtraLints([other], t).map((l) => l.rule), ['ItsContraction']);
 });
 
+test('"doublecheck" gets the hyphenated "double-check", not Harper\'s "double check"', () => {
+  const t = 'Just wanted to doublecheck that. Doubleclick it.';
+  const split = (start, end, text) => ({ rule: 'SplitWords', start, end, kind: 'Spelling',
+    message: `\`${t.slice(start, end)}\` should probably be written as \`${text}\`.`, suggestions: [{ kind: 'replace', text }] });
+  const [a, b] = withExtraLints([split(15, 26, 'double check'), split(33, 44, 'Double click')], t);
+  assert.equal(a.suggestions[0].text, 'double-check');
+  assert.equal(a.message, '`doublecheck` should probably be written as `double-check`.');
+  assert.equal(b.suggestions[0].text, 'Double-click');
+  const other = split(15, 26, 'some thing');
+  assert.equal(withExtraLints([other], t)[0].suggestions[0].text, 'some thing');
+});
+
 test('the prompts carry the punctuation the author avoids, and "no rewrites" when off', () => {
   const s = normalizeSettings({ ...both, rewriteSuggestions: false });
   assert.match(authorContext(s), /never uses semicolons or dashes/);
